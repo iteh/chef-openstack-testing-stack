@@ -90,6 +90,12 @@ $ chef-client -z destroy_all.rb
 
 To run Juno on Ubuntu 14.04 you need to make two manual changes your Chef Run:
 
+## Adding Ubuntu 14.04 box
+
+```
+vagrant box add ubuntu1404 http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box
+```
+
 ### Use Chef 12 RC1
 
 Until the official release of Chef 12 you need to resort to it's Release Candidate. Without it, you will run into problems with starting rabbitmq and all OpenStack services. The problem is caused by Ubuntu's switch to Upstart to start services (http://en.wikipedia.org/wiki/Upstart) on recent Ubuntu releases.
