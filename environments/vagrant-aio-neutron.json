@@ -36,6 +36,12 @@
                     "bind_interface": "eth1"
                 }
             },
+            "block-storage": {
+                "volume": {
+                    "create_volume_group": true,
+                    "default_volume_type": "lvm"
+                }
+            },
             "image": {
                 "image_upload": true,
                 "upload_images": [
