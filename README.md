@@ -88,7 +88,9 @@ $ chef-client -z destroy_all.rb
 
 ## Running Juno on Ubuntu 14.04
 
-To run Juno on Ubuntu 14.04 you need to make two manual changes your Chef Run:
+To make Juno work, we included two forked cookbooks with some hot fixes. These make it possible to run Juno on Ubuntu 14.04. The changes can be seen in the Berksfile.
+
+To run it you also need to make three manual changes your Chef Run:
 
 ## Adding Ubuntu 14.04 box
 
