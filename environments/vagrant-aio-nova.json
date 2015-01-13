@@ -14,6 +14,23 @@
           "host": "0.0.0.0"
         }
       },
+      "block-storage": {
+        "volume": {
+          "create_volume_group": false,
+          "default_volume_type": "lvm",
+          "volume_group": "sddrive",
+          "multi_backend": {
+            "lvm1": {
+              "volume_driver": "cinder.volume.drivers.lvm.LVMISCSIDriver",
+              "volume_backend_name": "sddrive"
+            },
+            "lvm2": {
+              "volume_driver": "cinder.volume.drivers.lvm.LVMISCSIDriver",
+              "volume_backend_name": "flashdrive"
+            }
+          }
+        }
+      },
       "image": {
         "image_upload": true,
         "upload_images": [
@@ -41,7 +58,7 @@
             "num_networks": "1",
             "network_size": "255",
             "bridge": "br100",
-            "bridge_dev": "eth1",
+            "bridge_dev": "eth0",
             "dns1": "8.8.8.8",
             "dns2": "8.8.4.4"
           }

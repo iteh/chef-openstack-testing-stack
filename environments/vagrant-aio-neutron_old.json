@@ -20,7 +20,6 @@
                 "bind-host": "0.0.0.0"
             },
             "network": {
-                "service_plugins": [ "neutron.services.l3_router.l3_router_plugin.L3RouterPlugin" ],
                 "dhcp": {
                     "enable_isolated_metadata": "True"
                 },
@@ -30,23 +29,30 @@
                 "openvswitch": {
                     "tunnel_id_ranges": "1:1000",
                     "enable_tunneling": "True",
-                    "tunnel_type": "gre",
-                    "tenant_network_type": "gre"
+                    "tenant_network_type": "gre",
+                    "local_ip_interface": "eth0"
                 },
                 "api": {
-                    "bind_interface": "bond2"
-                },
-                "quota": {
-                    "floatingip": "50"
+                    "bind_interface": "eth0"
                 },
                 "l3": {
-                    "external_network_bridge_interface": "bond2"
+                    "external_network_bridge_interface": "eth0"
                 }
             },
             "block-storage": {
                 "volume": {
-                    "create_volume_group": true,
-                    "default_volume_type": "lvm"
+                    "create_volume_group": false,
+                    "default_volume_type": "lvm",
+                    "multi_backend": {
+                        "lvm1": {
+                          "volume_driver": "cinder.volume.drivers.lvm.LVMISCSIDriver",
+                          "volume_backend_name": "sddrive"
+                        },
+                        "lvm2": {
+                          "volume_driver": "cinder.volume.drivers.lvm.LVMISCSIDriver",
+                          "volume_backend_name": "flashdrive"
+                        }
+                    }
                 }
             },
             "image": {
@@ -60,6 +66,7 @@
             },
             "compute": {
                 "network": {
+                    "public_interface": "eth0",
                     "service_type": "neutron"
                 },
                 "config": {
@@ -67,7 +74,19 @@
                 },
                 "libvirt": {
                     "virt_type": "qemu"
-                }
+                },
+                "networks": [
+                    {
+                        "label": "public",
+                        "ipv4_cidr": "192.168.10.0/24",
+                        "num_networks": "1",
+                        "network_size": "255",
+                        "bridge": "br100",
+                        "bridge_dev": "eth0",
+                        "dns1": "8.8.8.8",
+                        "dns2": "8.8.4.4"
+                    }
+                ]
             }
         }
     }
